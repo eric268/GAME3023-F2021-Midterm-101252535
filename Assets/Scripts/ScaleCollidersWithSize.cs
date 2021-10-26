@@ -9,10 +9,9 @@ public class ScaleCollidersWithSize : MonoBehaviour
     private RectTransform m_rect;
     [SerializeField]
     private Vector2 m_dimensions;
-
     public Vector2 m_offset;
 
-    private 
+
 
     // Start is called before the first frame update
     void Start()

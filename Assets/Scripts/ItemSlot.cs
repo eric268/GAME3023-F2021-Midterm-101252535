@@ -8,6 +8,8 @@ public class ItemSlot : MonoBehaviour
 {
     public Item itemInSlot = null;
 
+    private int m_iSlotStorageNumber = 0;
+
     [SerializeField]
     private int itemCount = 0;
     public int ItemCount
@@ -45,10 +47,29 @@ public class ItemSlot : MonoBehaviour
         }
     }
 
+    public void ItemAddedToStack()
+    {
+        if (itemInSlot != null)
+        {
+            itemCount++;
+            RefreshInfo();
+        }
+    }
+
+    public void ItemFromStackMoved()
+    {
+        if (itemInSlot != null)
+        {
+            itemCount--;
+            RefreshInfo();
+        }
+    }
+
     public void RefreshInfo()
     {
         if(ItemCount < 1)
         {
+            //Destroy(itemInSlot);
             itemInSlot = null;
         }
 
@@ -61,8 +82,13 @@ public class ItemSlot : MonoBehaviour
         } else
         {
             // No item
-            itemCountText.text = "";
-            icon.gameObject.SetActive(false);
+            if (itemCountText != null)
+                itemCountText.text = "";
+
+            if (icon != null)
+                icon.gameObject.SetActive(false);
+
+
         }
     }
 }

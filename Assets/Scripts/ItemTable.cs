@@ -7,7 +7,7 @@ using UnityEngine;
 public class ItemTable : ScriptableObject
 {
     [SerializeField]
-    private List<Item> table;  //The index of each item in the table is its ID
+    private List<Item> table = new List<Item>();  //The index of each item in the table is its ID
     public Item GetItem(int id)
     {
         return table[id];
