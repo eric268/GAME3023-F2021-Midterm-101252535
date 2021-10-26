@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Overworld
   - ContainerTrigger
+  - Tile
   layers:
   - Default
   - TransparentFX

@@ -21,6 +21,7 @@ public class ItemSlotGridDimensioner : MonoBehaviour
         {
             GameObject newObject = Instantiate(itemSlotPrefab, this.transform);
             newObject.name = "Tile " + counter;
+            counter++;
         }
         m_tileColliderArray = GetComponentsInChildren<BoxCollider2D>();
 

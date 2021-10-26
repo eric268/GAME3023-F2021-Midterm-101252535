@@ -1,16 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class OnDrop : MonoBehaviour, IDropHandler
+public class InvTileAttributes : MonoBehaviour
 {
-    void IDropHandler.OnDrop(PointerEventData eventData)
-    {
-        
-    }
-
     // Start is called before the first frame update
     void Start()
     {

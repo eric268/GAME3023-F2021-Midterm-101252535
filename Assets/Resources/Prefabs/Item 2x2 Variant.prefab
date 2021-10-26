@@ -7,6 +7,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1290929292835872389, guid: 73881833c406e5642ac97d666661f18b, type: 3}
+      propertyPath: m_iNumRequiredSlots
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2077494777347254813, guid: 73881833c406e5642ac97d666661f18b, type: 3}
+      propertyPath: m_dimensions.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2077494777347254813, guid: 73881833c406e5642ac97d666661f18b, type: 3}
+      propertyPath: m_dimensions.y
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2191028505521124536, guid: 73881833c406e5642ac97d666661f18b, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -30,6 +42,14 @@ PrefabInstance:
     - target: {fileID: 2220279275125925362, guid: 73881833c406e5642ac97d666661f18b, type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220279275125925362, guid: 73881833c406e5642ac97d666661f18b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220279275125925362, guid: 73881833c406e5642ac97d666661f18b, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2284994332423479218, guid: 73881833c406e5642ac97d666661f18b, type: 3}
       propertyPath: m_RootOrder
