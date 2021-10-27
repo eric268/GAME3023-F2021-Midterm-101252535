@@ -27,7 +27,7 @@ public class OnDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
     //Tries to place item in an inventory menu
     public void OnEndDrag(PointerEventData eventData)
     {
-        CheckIfItemCanBePlaced();
+        CheckCollisionWithItemSlots();
     }
     //Ensures item stays on mouse position
     void IDragHandler.OnDrag(PointerEventData eventData)
@@ -73,30 +73,11 @@ public class OnDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
         m_itemGameObject.GetComponent<RectTransform>().anchoredPosition = m_previousStackItem.GetComponent<RectTransform>().anchoredPosition;
     }
 
-    void CheckIfItemCanBePlaced()
+
+    void CheckCollisionWithItemSlots()
     {
-        //Each item knows the number of collisions with tiles it should have if it is to be placed
-        //This checks to see if it has collided with the correct amount
         int collisionsWithInventory = 0;
         Collider2D m_bottomRightItemSlotCollider = null;
-
-        CheckCollisionWithItemSlots(ref collisionsWithInventory, ref m_bottomRightItemSlotCollider);
-
-        if (m_itemCollider != null && m_bottomRightItemSlotCollider != null)
-        {
-            if (collisionsWithInventory >= m_iNumRequiredSlots)
-            {
-                PlaceItemInInventory(m_bottomRightItemSlotCollider);
-            }
-            else
-            {
-                Destroy(m_createdGameObject);
-            }
-        }
-    }
-
-    void CheckCollisionWithItemSlots(ref int collisionsWithInv, ref Collider2D m_bottomRightColliderSlot)
-    {
         //List to hold all current collisions
         List<Collider2D> collArray = new List<Collider2D>();
         m_itemCollider.OverlapCollider(new ContactFilter2D(), collArray);
@@ -110,13 +91,13 @@ public class OnDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
             //If the item is colliding with a tile then increment its tile collision counter
             if (col.transform.parent.gameObject.GetComponent<TileAttributes>())
             {
-                collisionsWithInv++;
+                collisionsWithInventory++;
                 RectTransform tempRT = col.transform.parent.gameObject.GetComponent<RectTransform>();
 
                 //If a more bottom/right collider is found set that to the currentBottomRightSlot
                 if (tempRT.anchoredPosition.x >= largestXValue && tempRT.anchoredPosition.y <= lowestYValue)
                 {
-                    m_bottomRightColliderSlot = col;
+                    m_bottomRightItemSlotCollider = col;
                     largestXValue = tempRT.anchoredPosition.x;
                     lowestYValue = tempRT.anchoredPosition.y;
 
@@ -141,6 +122,21 @@ public class OnDrag : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHa
                     return;
                 }
             }
+        }
+        if (m_itemCollider != null && m_bottomRightItemSlotCollider != null)
+        {
+            if (collisionsWithInventory >= m_iNumRequiredSlots)
+            {
+                PlaceItemInInventory(m_bottomRightItemSlotCollider);
+            }
+            else
+            {
+                Destroy(m_createdGameObject);
+            }
+        }
+        else
+        {
+            Destroy(m_createdGameObject);
         }
     }
     // Start is called before the first frame update
