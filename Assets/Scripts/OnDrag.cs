@@ -19,7 +19,6 @@ public class OnDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
     [SerializeField]
     private GameObject m_canvas;
 
-    private GameObject m_containerCanvas;
     private float m_fCanvasScale;
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -33,9 +32,8 @@ public class OnDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
         m_shapeCollider = m_createdGameObject.GetComponentInChildren<Collider2D>();
         m_previousStackItem = eventData.pointerEnter;
         m_iconRectTransform.SetParent(m_previousStackItem.transform.parent.transform);
-        
+        m_iconRectTransform.localScale = Vector3.one;
         m_iconRectTransform.anchoredPosition = m_previousStackItem.GetComponent<RectTransform>().anchoredPosition;
-        Debug.Log(m_iconRectTransform.anchoredPosition);
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -57,7 +55,7 @@ public class OnDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
             foreach (Collider2D col in collArray)
             {
                 //Debug.Log(col.gameObject.name);
-                if (col.transform.parent.gameObject.GetComponent<InvTileAttributes>())
+                if (col.transform.parent.gameObject.GetComponent<TileAttributes>())
                 {
                     collisionsWithInventory++;
                     RectTransform tempRT = col.transform.parent.gameObject.GetComponent<RectTransform>();
@@ -66,6 +64,8 @@ public class OnDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
                         m_lastInventoryCollider = col;
                         largestXValue = tempRT.anchoredPosition.x;
                         lowestYValue = tempRT.anchoredPosition.y;
+
+                        m_iconRectTransform.GetComponent<ItemManager>().m_iCurrentTileNumber = col.transform.parent.gameObject.GetComponent<TileAttributes>().m_iTileNumber;
                     }
                 }
                 else if (col.gameObject.GetComponent<OnDrag>())
@@ -77,7 +77,8 @@ public class OnDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
                     {
                         col.GetComponent<ItemSlot>().ItemAddedToStack();
                         m_previousStackItem.GetComponent<ItemSlot>().ItemFromStackMoved();
-                        break;
+                        Destroy(m_createdGameObject);
+                        return;
                     }
                     else
                     {
@@ -90,21 +91,14 @@ public class OnDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
             //Set the slot quantity to 1, remove 1 from taken from inventory
             if (collisionsWithInventory >= m_iNumRequiredSlots)
             {
-                //Debug.Log("Name: " + m_lastInventoryCollider.transform.parent.gameObject.name);
-                //Debug.Log("Offset: " + m_iconRectTransform.GetComponent<ScaleCollidersWithSize>().m_offset);
 
-                if (m_lastInventoryCollider != null)
-                {
-                    m_iconRectTransform.transform.SetParent(m_lastInventoryCollider.transform.parent.gameObject.transform);
-                    m_previousStackItem.GetComponent<ItemSlot>().ItemFromStackMoved();
-                }    
+                GameObject tileOwningCollider = m_lastInventoryCollider.transform.parent.gameObject;
+                m_iconRectTransform.transform.SetParent(tileOwningCollider.transform);
+                m_previousStackItem.GetComponent<ItemSlot>().ItemFromStackMoved();
 
                 m_iconRectTransform.anchoredPosition = Vector2.zero;
-                m_iconRectTransform.transform.SetParent(m_containerCanvas.transform);
-                m_iconRectTransform.anchoredPosition += m_iconRectTransform.GetComponent<ScaleCollidersWithSize>().m_offset;
-
-
-                //m_iconRectTransform.GetComponentInChildren<TextMeshProUGUI>().text.toin
+                m_iconRectTransform.GetComponent<ItemManager>().AttachToCanvas(tileOwningCollider.GetComponent<TileAttributes>().m_tileType);
+                m_iconRectTransform.anchoredPosition += m_iconRectTransform.GetComponent<ItemManager>().m_offset;
             }
             else
             {
@@ -134,8 +128,6 @@ public class OnDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEn
     {
         //m_prefabPath = "Prefabs/" + transform.parent.gameObject.name;
         //m_GameObjectPrefab = Resources.Load(m_prefabPath) as GameObject;
-        m_canvas = GameObject.Find("Canvas");
-        m_containerCanvas = GameObject.Find("ContainerCanvas");
         m_fCanvasScale = m_canvas.GetComponent<Canvas>().scaleFactor;
 
     }

@@ -180,7 +180,6 @@ GameObject:
   - component: {fileID: 5395119484665452975}
   - component: {fileID: 5395119484665452969}
   - component: {fileID: 5395119484665452968}
-  - component: {fileID: 1557236719487165103}
   m_Layer: 5
   m_Name: ContainerCanvas
   m_TagString: Untagged
@@ -246,20 +245,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1557236719487165103
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5395119484665452974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 13684a5245cf474499b0a771f90acaa0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  containerCanvas: {fileID: 0}
-  itemTable: {fileID: 0}
 --- !u!1 &5395119485459324790
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,6 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSlotPrefab: {fileID: 9065499456974609210, guid: 7d0c280c18fc7f44d993301e547d625c, type: 3}
   GridDimensions: {x: 5, y: 5}
+  m_tileType: 1
 --- !u!114 &5395119485459324780
 MonoBehaviour:
   m_ObjectHideFlags: 0

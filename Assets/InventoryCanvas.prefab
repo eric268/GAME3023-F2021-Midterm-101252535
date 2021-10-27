@@ -424,6 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemSlotPrefab: {fileID: 9065499456974609210, guid: 7d0c280c18fc7f44d993301e547d625c, type: 3}
   GridDimensions: {x: 5, y: 5}
+  m_tileType: 0
 --- !u!114 &3272399871756723927
 MonoBehaviour:
   m_ObjectHideFlags: 0

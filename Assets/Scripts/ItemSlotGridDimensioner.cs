@@ -9,9 +9,13 @@ public class ItemSlotGridDimensioner : MonoBehaviour
     [SerializeField]
     GameObject itemSlotPrefab;
     int counter = 1;
+
     [SerializeField]
     Vector2Int GridDimensions = new Vector2Int(6, 6);
     BoxCollider2D[] m_tileColliderArray;
+
+    [SerializeField]
+    private TileType m_tileType;
 
     void Start()
     {
@@ -20,7 +24,9 @@ public class ItemSlotGridDimensioner : MonoBehaviour
         while (transform.childCount < numCells)
         {
             GameObject newObject = Instantiate(itemSlotPrefab, this.transform);
+            newObject.GetComponent<TileAttributes>().m_tileType = m_tileType;
             newObject.name = "Tile " + counter;
+            newObject.GetComponent<TileAttributes>().m_iTileNumber = counter;
             counter++;
         }
         m_tileColliderArray = GetComponentsInChildren<BoxCollider2D>();
