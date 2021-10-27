@@ -45,17 +45,13 @@ public class Inventory : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collision)
-    {
-       //if (collision.gameObject == m_playerRef)
-        {
+    { 
             OpenContainer();
-        }
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-        //if (collision.gameObject == m_playerRef)
-        {
+
             CloseContainer();
-        }
+        
     }
 }
