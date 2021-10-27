@@ -69,17 +69,17 @@ public class ItemSlot : MonoBehaviour
     {
         if(ItemCount < 1)
         {
-            //Destroy(itemInSlot);
             itemInSlot = null;
         }
 
-        if(itemInSlot != null) // If an item is present
+        if (itemInSlot != null) // If an item is present
         {
             //update image and text
             itemCountText.text = ItemCount.ToString();
             icon.sprite = itemInSlot.icon;
             icon.gameObject.SetActive(true);
-        } else
+        }
+        else
         {
             // No item
             if (itemCountText != null)
