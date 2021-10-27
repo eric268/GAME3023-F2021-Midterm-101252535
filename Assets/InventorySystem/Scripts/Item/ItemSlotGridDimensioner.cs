@@ -23,6 +23,7 @@ public class ItemSlotGridDimensioner : MonoBehaviour
 
         while (transform.childCount < numCells)
         {
+            //Provides information to tiles
             GameObject newObject = Instantiate(itemSlotPrefab, this.transform);
             newObject.GetComponent<TileAttributes>().m_tileType = m_tileType;
             newObject.name = "Tile " + counter;

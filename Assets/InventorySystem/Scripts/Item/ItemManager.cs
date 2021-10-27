@@ -24,6 +24,7 @@ public class ItemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Scales the items to fit any canvas size as canvas scales with screen size
         m_collider = GetComponent<BoxCollider2D>();
         m_rect = GetComponent<RectTransform>();
         m_collider.size = (m_rect.sizeDelta*0.85f);
@@ -37,6 +38,7 @@ public class ItemManager : MonoBehaviour
     {
         switch (type)
         {
+            //Places the item under the correct canvas
             case TileType.INVENTORY_TILE:
                 transform.SetParent(m_inventoryCanvas.transform);
                 m_canvasCurrentlyAttachedToo = TileType.INVENTORY_TILE;

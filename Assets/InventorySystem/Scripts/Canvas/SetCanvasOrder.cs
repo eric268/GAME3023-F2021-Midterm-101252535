@@ -8,6 +8,8 @@ public class SetCanvasOrder : MonoBehaviour
     [SerializeField]
     TileType m_type;
     bool m_mouseButtonDown = false;
+
+    //Sets canvas collider values
     private void Start()
     {
         m_collider = GetComponent<BoxCollider2D>();
@@ -19,7 +21,8 @@ public class SetCanvasOrder : MonoBehaviour
         }
         
     }
-
+    //Checks if the mouse if over which canvas and sets that to be the first child under the main canvas
+    //This is so it is rendered above other items
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))

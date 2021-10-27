@@ -46,7 +46,7 @@ public class ItemSlot : MonoBehaviour
             }
         }
     }
-
+    //Adds item to a stack of existing items
     public void ItemAddedToStack()
     {
         if (itemInSlot != null)
@@ -55,7 +55,7 @@ public class ItemSlot : MonoBehaviour
             RefreshInfo();
         }
     }
-
+    //Removes stack from stack of existing items
     public void ItemFromStackMoved()
     {
         if (itemInSlot != null)
